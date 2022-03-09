@@ -11,7 +11,7 @@ public class DirectoryParserTests
     private const string MockArtist = "MockArtist";
     private const string MockDestinationDirectory = "/Home/Downloads/Foo - Bar/";
     private const int MockTrackNumber = 3;
-    private const string MockTrackName = "MockTrackName";
+    private const string MockTrackName = "  MockTrack / Name ";
     
     private static readonly char[] InvalidPathChars = Path.GetInvalidPathChars();
     private static readonly string InvalidPathCharsString = new(InvalidPathChars);
@@ -47,19 +47,47 @@ public class DirectoryParserTests
         Assert.Throws<ArgumentNullException>(() => DirectoryParser.GetDestinationFilePath(MockDestinationDirectory, MockTrackNumber, null));
     }
 
-    [Test]
-    public void GetDestinationFilePath_CanGetDestinationFilePath_RemovesInvalidChars()
+    [TestCase("MockTrackName", "MockTrackName")]
+    [TestCase("MockTrack/Name", "MockTrackName")]
+    [TestCase("MockTrack/ Name", "MockTrack Name")]
+    [TestCase("MockTrack /Name", "MockTrack Name")]
+    [TestCase("MockTrack / Name", "MockTrack Name")]
+    [TestCase("   MockTrack / Name", "MockTrack Name")]
+    [TestCase("MockTrack / Name   ", "MockTrack Name")]
+    [TestCase("   MockTrack / Name  ", "MockTrack Name")]
+    public void GetDestinationFilePath_CanGetDestinationFilePath_CleansTrackName(string inputTrackName, string expectedOutputTrackName)
     {
         // arrange
         var mockDestinationDirectoryWithInvalidChars = $"{InvalidPathCharsString}{MockDestinationDirectory}{InvalidPathCharsString}";
-        var mockTrackNameWithInvalidChars = $"{InvalidPathCharsString}{MockTrackName}{InvalidPathCharsString}";
         
         // act
-        var result = DirectoryParser.GetDestinationFilePath(mockDestinationDirectoryWithInvalidChars, MockTrackNumber, mockTrackNameWithInvalidChars);
+        var result = DirectoryParser.GetDestinationFilePath(mockDestinationDirectoryWithInvalidChars, MockTrackNumber, inputTrackName);
         
         // assert
         Assert.IsNotNull(result);
-        Assert.AreEqual($"{MockDestinationDirectory}/{MockTrackNumber:D2} {MockTrackName}.mp3", result);
+        Assert.AreEqual($"{MockDestinationDirectory}/{MockTrackNumber:D2} {expectedOutputTrackName}.mp3", result);
+    }
+    
+    [TestCase(null)]
+    [TestCase("")]
+    [TestCase(" ")]
+    public void RemoveInvalidFileNameChars_ValidatesArgs(string fileName)
+    {
+        Assert.Throws<ArgumentNullException>(() => DirectoryParser.RemoveInvalidFileNameChars(fileName));
+    }
+
+    [Test]
+    public void RemoveInvalidFileNameChars_CanRemoveInvalidPathChars()
+    {
+        // arrange
+        const string fileNameWithInvalidChars = "VI / Outro";
+        
+        // act
+        var result = DirectoryParser.RemoveInvalidFileNameChars(fileNameWithInvalidChars);
+        
+        // assert
+        Assert.IsNotNull(result);
+        Assert.AreEqual("VI  Outro", result);
     }
     
     [TestCase(null)]

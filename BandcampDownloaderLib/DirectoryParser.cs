@@ -2,6 +2,10 @@ namespace BandcampDownloaderLib;
 
 public static class DirectoryParser
 {
+    private const string DoubleSpace = "  ";
+    private const string SingleSpace = " ";
+    
+    private static readonly char[] InvalidFileNameChars = Path.GetInvalidFileNameChars();
     private static readonly char[] InvalidPathChars = Path.GetInvalidPathChars();
 
     public static string GetDestinationDirectory(string? artist, string? album)
@@ -22,15 +26,27 @@ public static class DirectoryParser
             throw new ArgumentException("Must be greater than 0.", nameof(trackNumber));
         if (string.IsNullOrWhiteSpace(trackName))
             throw new ArgumentNullException(nameof(trackName));
+
+        var trackNameClean = RemoveInvalidFileNameChars(trackName)
+            .RepeatedlyReplace(DoubleSpace, SingleSpace)
+            .Trim();
         
-        return $"{RemoveInvalidPathChars(destinationDirectory)}/{trackNumber.ToString("D2")} {RemoveInvalidPathChars(trackName)}.mp3";
+        return $"{RemoveInvalidPathChars(destinationDirectory)}/{trackNumber.ToString("D2")} {trackNameClean}.mp3";
     }
 
+    public static string RemoveInvalidFileNameChars(string fileName)
+    {
+        if (string.IsNullOrWhiteSpace(fileName))
+            throw new ArgumentNullException(nameof(fileName));
+        
+        return string.Join(string.Empty, fileName.Split(InvalidFileNameChars));    
+    }
+    
     public static string RemoveInvalidPathChars(string path)
     {
         if (string.IsNullOrWhiteSpace(path))
             throw new ArgumentNullException(nameof(path));
-        
-        return string.Join(string.Empty, path.Split(InvalidPathChars));    
+
+        return string.Join(string.Empty, path.Split(InvalidPathChars));
     }
 }
