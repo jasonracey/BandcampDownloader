@@ -1,6 +1,4 @@
 using System;
-using System.IO;
-using System.Threading.Tasks;
 using Moq;
 using NUnit.Framework;
 
@@ -9,7 +7,7 @@ namespace BandcampDownloaderLib.UnitTests
     [TestFixture]
     public class BandcampDownloaderTests
     {
-        private static readonly string MockAlbumPage = File.ReadAllText("Data/AlbumPage.html");
+        private const string MockAlbumPage = "<html><body>mock page</body></html>";
         private static readonly Uri MockUri = new ("https://www.bandcamp.com");
         
         private readonly BandcampDownloader _target;
@@ -50,12 +48,6 @@ namespace BandcampDownloaderLib.UnitTests
         public void DownloadTracksAsync_ValidatesArgs()
         {
             Assert.ThrowsAsync<ArgumentNullException>(async () => await _target.DownloadTracksAsync(null));
-        }
-
-        [Test]
-        public async Task DownloadTracksAsync_CanDownloadTracks()
-        {
-            await _target.DownloadTracksAsync(MockUri);
         }
 
         [Test]
