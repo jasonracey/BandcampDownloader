@@ -1,30 +1,31 @@
 using System;
 using NUnit.Framework;
 
-namespace BandcampDownloaderLib.UnitTests;
-
-[TestFixture]
-public class StringExtensionsTests
+namespace BandcampDownloaderLib.UnitTests
 {
-    [Test]
-    public void RepeatedlyReplace_NullString_Throws()
+    [TestFixture]
+    public class StringExtensionsTests
     {
-        // arrange
-        string testString = null!;
+        [Test]
+        public void RepeatedlyReplace_NullString_Throws()
+        {
+            // arrange
+            string testString = null!;
         
-        // act/assert
-        Assert.Throws<ArgumentNullException>(() => testString.RepeatedlyReplace("  ", " "));
-    }
+            // act/assert
+            Assert.Throws<ArgumentNullException>(() => testString.RepeatedlyReplace("  ", " "));
+        }
     
-    [TestCase("", "")]
-    [TestCase(" ", " ")]
-    [TestCase("  ", " ")]
-    [TestCase("ab", "ab")]
-    [TestCase("a b", "a b")]
-    [TestCase("a  b", "a b")]
-    [TestCase("a   b", "a b")]
-    public void RepeatedlyReplace_ReturnsExpectedString(string input, string expectedOutput)
-    {
-        Assert.AreEqual(expectedOutput, input.RepeatedlyReplace("  ", " "));
+        [TestCase("", "")]
+        [TestCase(" ", " ")]
+        [TestCase("  ", " ")]
+        [TestCase("ab", "ab")]
+        [TestCase("a b", "a b")]
+        [TestCase("a  b", "a b")]
+        [TestCase("a   b", "a b")]
+        public void RepeatedlyReplace_ReturnsExpectedString(string input, string expectedOutput)
+        {
+            Assert.AreEqual(expectedOutput, input.RepeatedlyReplace("  ", " "));
+        }
     }
 }

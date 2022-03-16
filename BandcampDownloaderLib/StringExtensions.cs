@@ -1,14 +1,20 @@
-namespace BandcampDownloaderLib;
+using System;
 
-public static class StringExtensions
+namespace BandcampDownloaderLib
 {
-    public static string RepeatedlyReplace(this string input, string oldValue, string newValue)
+    public static class StringExtensions
     {
-        while (input.Contains(oldValue))
+        public static string RepeatedlyReplace(this string input, string oldValue, string newValue)
         {
-            input = input.Replace(oldValue, newValue);
-        }
+            if (input == null)
+                throw new ArgumentNullException(nameof(input));
+            
+            while (input.Contains(oldValue))
+            {
+                input = input.Replace(oldValue, newValue);
+            }
 
-        return input;
+            return input;
+        }
     }
 }

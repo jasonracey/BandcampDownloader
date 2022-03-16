@@ -1,22 +1,26 @@
-namespace BandcampDownloaderLib;
+using System;
+using System.Linq;
 
-public static class AlbumAndArtistParser
+namespace BandcampDownloaderLib
 {
-    public static (string Album, string Artist) GetAlbumAndArtist(string albumPage)
+    public static class AlbumAndArtistParser
     {
-        if (string.IsNullOrWhiteSpace(albumPage))
-            throw new ArgumentNullException(nameof(albumPage));
-            
-        var items = albumPage
-            .Split("<title>").Skip(1).FirstOrDefault()?
-            .Split("</title>").FirstOrDefault()?
-            .Split(" | ") ?? Array.Empty<string>();
-
-        if (items.Length <= 1 || string.IsNullOrWhiteSpace(items[0]) || string.IsNullOrWhiteSpace(items[1]))
+        public static (string Album, string Artist) GetAlbumAndArtist(string albumPage)
         {
-            throw new BandcampDownloaderException(ExceptionReason.CouldNotParseAlbumAndArtist);
-        }
+            if (string.IsNullOrWhiteSpace(albumPage))
+                throw new ArgumentNullException(nameof(albumPage));
+            
+            var items = albumPage
+                .Split("<title>").Skip(1).FirstOrDefault()?
+                .Split("</title>").FirstOrDefault()?
+                .Split(" | ") ?? Array.Empty<string>();
+
+            if (items.Length <= 1 || string.IsNullOrWhiteSpace(items[0]) || string.IsNullOrWhiteSpace(items[1]))
+            {
+                throw new BandcampDownloaderException(ExceptionReason.CouldNotParseAlbumAndArtist);
+            }
         
-        return (items[0], items[1]);
+            return (items[0], items[1]);
+        }
     }
 }
