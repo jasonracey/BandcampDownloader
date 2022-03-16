@@ -1,5 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloaderConsole", "BandcampDownloaderConsole\BandcampDownloaderConsole.csproj", "{A596AADE-0BAD-41F1-B0A2-3D5C16C9298F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloaderLib", "BandcampDownloaderLib\BandcampDownloaderLib.csproj", "{D5FDE2AE-848A-42F8-8FFC-FE2CF5168ECD}"
@@ -7,6 +8,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloaderLib.UnitTests", "BandcampDownloaderLib.UnitTests\BandcampDownloaderLib.UnitTests.csproj", "{E37F92DC-41BF-4E83-8CA2-63FDCE9F268E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloaderLib.SmokeTests", "BandcampDownloaderLib.SmokeTests\BandcampDownloaderLib.SmokeTests.csproj", "{72FCD47E-88B7-42F4-9C95-C13C64484F0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloader", "BandcampDownloader\BandcampDownloader.csproj", "{D540AF3A-292D-4A7F-8BBE-D5EA2848EDE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +33,9 @@ Global
 		{72FCD47E-88B7-42F4-9C95-C13C64484F0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72FCD47E-88B7-42F4-9C95-C13C64484F0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72FCD47E-88B7-42F4-9C95-C13C64484F0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D540AF3A-292D-4A7F-8BBE-D5EA2848EDE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D540AF3A-292D-4A7F-8BBE-D5EA2848EDE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D540AF3A-292D-4A7F-8BBE-D5EA2848EDE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D540AF3A-292D-4A7F-8BBE-D5EA2848EDE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
