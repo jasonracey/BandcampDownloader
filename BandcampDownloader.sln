@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloaderLib.UnitT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloaderLib.SmokeTests", "BandcampDownloaderLib.SmokeTests\BandcampDownloaderLib.SmokeTests.csproj", "{72FCD47E-88B7-42F4-9C95-C13C64484F0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloader", "BandcampDownloader\BandcampDownloader.csproj", "{D540AF3A-292D-4A7F-8BBE-D5EA2848EDE5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BandcampDownloaderUI", "BandcampDownloaderUI\BandcampDownloaderUI.csproj", "{D540AF3A-292D-4A7F-8BBE-D5EA2848EDE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

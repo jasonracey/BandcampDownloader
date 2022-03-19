@@ -1,6 +1,6 @@
 ﻿using AppKit;
 
-namespace BandcampDownloader
+namespace BandcampDownloaderUI
 {
     static class MainClass
     {

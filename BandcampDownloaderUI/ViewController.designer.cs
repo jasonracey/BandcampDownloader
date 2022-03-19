@@ -7,7 +7,7 @@
 using Foundation;
 using System.CodeDom.Compiler;
 
-namespace BandcampDownloader
+namespace BandcampDownloaderUI
 {
 	[Register ("ViewController")]
 	partial class ViewController

@@ -1,7 +1,7 @@
 ﻿using AppKit;
 using Foundation;
 
-namespace BandcampDownloader
+namespace BandcampDownloaderUI
 {
     [Register("AppDelegate")]
     public class AppDelegate : NSApplicationDelegate

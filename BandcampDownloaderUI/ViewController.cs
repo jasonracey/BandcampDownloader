@@ -4,7 +4,7 @@ using AppKit;
 using BandcampDownloaderLib;
 using Foundation;
 
-namespace BandcampDownloader
+namespace BandcampDownloaderUI
 {
     public partial class ViewController : NSViewController
     {
