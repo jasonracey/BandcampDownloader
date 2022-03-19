@@ -66,6 +66,7 @@ namespace BandcampDownloader
         {
             URL.Editable = false;
             URL.Enabled = false;
+            Progress.Hidden = false;
             Clear.Enabled = false;
             Download.Enabled = false;
         }
@@ -76,6 +77,7 @@ namespace BandcampDownloader
             URL.Editable = true;
             URL.Enabled = true;
             Progress.DoubleValue = 0.0D;
+            Progress.Hidden = true;
             Clear.Enabled = false;
             Download.Enabled = false;
         }
