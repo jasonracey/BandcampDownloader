@@ -94,6 +94,7 @@ namespace BandcampDownloaderUI
             URL.Enabled = true;
             Progress.DoubleValue = 0.0D;
             Progress.Hidden = true;
+            Status.StringValue = string.Empty;
             Status.TextColor = NSColor.White;
             Clear.Enabled = false;
             Download.Enabled = false;
