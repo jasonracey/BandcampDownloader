@@ -42,10 +42,19 @@ namespace BandcampDownloader
             SetBusyState();
             StartTimer();
 
-            await BandcampDownloader.DownloadTracksAsync(new Uri(URL.StringValue));
-            
-            StopTimer();
-            SetIdleState();
+            try
+            {
+                await BandcampDownloader.DownloadTracksAsync(new Uri(URL.StringValue));
+                SetIdleState();
+            }
+            catch (Exception e)
+            {
+                SetErrorState($"Error: {e.Message}");
+            }
+            finally
+            {
+                StopTimer();
+            }
         }
 
         private static double GetPercentCompleted()
@@ -71,6 +80,13 @@ namespace BandcampDownloader
             Download.Enabled = false;
         }
 
+        private void SetErrorState(string message)
+        {
+            SetIdleState();
+            Status.StringValue = message;
+            Status.TextColor = NSColor.Red;
+        }
+        
         private void SetIdleState()
         {
             URL.StringValue = string.Empty;
@@ -78,6 +94,7 @@ namespace BandcampDownloader
             URL.Enabled = true;
             Progress.DoubleValue = 0.0D;
             Progress.Hidden = true;
+            Status.TextColor = NSColor.White;
             Clear.Enabled = false;
             Download.Enabled = false;
         }
