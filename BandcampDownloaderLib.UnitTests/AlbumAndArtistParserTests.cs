@@ -40,7 +40,7 @@ namespace BandcampDownloaderLib.UnitTests
         {
             // act
             var thrown =
-                Assert.Throws<BandcampDownloaderException>(() => AlbumAndArtistParser.GetAlbumAndArtist(albumPage));
+                Assert.Throws<DownloaderException>(() => AlbumAndArtistParser.GetAlbumAndArtist(albumPage));
 
             // assert
             Assert.IsNotNull(thrown);

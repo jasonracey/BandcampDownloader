@@ -23,7 +23,7 @@ namespace BandcampDownloaderConsole
             }
             else
             {
-                var bandcampDownloader = new BandcampDownloader(
+                var bandcampDownloader = new Downloader(
                     resourceService,
                     trackTagger);
     

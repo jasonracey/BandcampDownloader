@@ -10,7 +10,7 @@ namespace BandcampDownloaderUI
     {
         private static readonly ResourceService ResourceService = new ResourceService();
         private static readonly TrackTagger TrackTagger = new TrackTagger();
-        private static readonly BandcampDownloaderLib.BandcampDownloader BandcampDownloader = new BandcampDownloaderLib.BandcampDownloader(
+        private static readonly Downloader Downloader = new Downloader(
             ResourceService,
             TrackTagger);
         
@@ -44,7 +44,7 @@ namespace BandcampDownloaderUI
 
             try
             {
-                await BandcampDownloader.DownloadTracksAsync(new Uri(URL.StringValue));
+                await Downloader.DownloadTracksAsync(new Uri(URL.StringValue));
                 SetIdleState();
             }
             catch (Exception e)
@@ -59,8 +59,8 @@ namespace BandcampDownloaderUI
 
         private static double GetPercentCompleted()
         {
-            var completed = BandcampDownloader?.ProcessingStatus?.CountCompleted ?? 0.0D;
-            var total = BandcampDownloader?.ProcessingStatus?.CountTotal ?? 0.0D ;
+            var completed = Downloader?.ProcessingStatus?.CountCompleted ?? 0.0D;
+            var total = Downloader?.ProcessingStatus?.CountTotal ?? 0.0D ;
             return total == 0.0D 
                 ? 0.0D 
                 : 100 * completed / total;
@@ -68,7 +68,7 @@ namespace BandcampDownloaderUI
 
         private static string GetStatusMessage()
         {
-            return BandcampDownloader?.ProcessingStatus?.Message ?? string.Empty;
+            return Downloader?.ProcessingStatus?.Message ?? string.Empty;
         }
 
         private void SetBusyState()

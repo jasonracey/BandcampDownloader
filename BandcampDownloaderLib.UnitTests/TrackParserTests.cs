@@ -14,9 +14,9 @@ namespace BandcampDownloaderLib.UnitTests
 
         private static readonly string EncodedTrackName = HttpUtility.HtmlEncode(MockTrackName);
         
-        [TestCase(null, BandcampDownloader.StreamBaseUrl)]
-        [TestCase("", BandcampDownloader.StreamBaseUrl)]
-        [TestCase(" ", BandcampDownloader.StreamBaseUrl)]
+        [TestCase(null, Downloader.StreamBaseUrl)]
+        [TestCase("", Downloader.StreamBaseUrl)]
+        [TestCase(" ", Downloader.StreamBaseUrl)]
         [TestCase(MockAlbumPage, null)]
         [TestCase(MockAlbumPage, "")]
         [TestCase(MockAlbumPage, " ")]
@@ -33,7 +33,7 @@ namespace BandcampDownloaderLib.UnitTests
             
             // act
             var tracks = TrackParser
-                .GetTracks(albumPage, BandcampDownloader.StreamBaseUrl)
+                .GetTracks(albumPage, Downloader.StreamBaseUrl)
                 .ToArray();
             
             // assert
@@ -54,7 +54,7 @@ namespace BandcampDownloaderLib.UnitTests
             const string albumPage = "<html>wrong page</html>";
             
             // act
-            var thrown = Assert.Throws<BandcampDownloaderException>(() => TrackParser.GetTracks(albumPage, BandcampDownloader.StreamBaseUrl));
+            var thrown = Assert.Throws<DownloaderException>(() => TrackParser.GetTracks(albumPage, Downloader.StreamBaseUrl));
             
             // assert
             Assert.IsNotNull(thrown);
@@ -100,7 +100,7 @@ namespace BandcampDownloaderLib.UnitTests
             var trackString = $"{beforeTrackName}{EncodedTrackName}{afterTrackName}";
             
             // act
-            var thrown = Assert.Throws<BandcampDownloaderException>(() => TrackParser.GetTrackName(trackString));
+            var thrown = Assert.Throws<DownloaderException>(() => TrackParser.GetTrackName(trackString));
             
             // assert
             Assert.IsNotNull(thrown);
@@ -145,16 +145,16 @@ namespace BandcampDownloaderLib.UnitTests
             var trackString = $"{beforeTrackNumber}7{afterTrackNumber}";
             
             // act
-            var thrown = Assert.Throws<BandcampDownloaderException>(() => TrackParser.GetTrackNumber(trackString));
+            var thrown = Assert.Throws<DownloaderException>(() => TrackParser.GetTrackNumber(trackString));
             
             // assert
             Assert.IsNotNull(thrown);
             Assert.AreEqual(ExceptionReason.CouldNotParseTrackNumber, thrown?.Message);
         }
 
-        [TestCase(null, BandcampDownloader.StreamBaseUrl)]
-        [TestCase("", BandcampDownloader.StreamBaseUrl)]
-        [TestCase(" ", BandcampDownloader.StreamBaseUrl)]
+        [TestCase(null, Downloader.StreamBaseUrl)]
+        [TestCase("", Downloader.StreamBaseUrl)]
+        [TestCase(" ", Downloader.StreamBaseUrl)]
         [TestCase(MockTrackString, null)]
         [TestCase(MockTrackString, "")]
         [TestCase(MockTrackString, " ")]
@@ -172,11 +172,11 @@ namespace BandcampDownloaderLib.UnitTests
             var trackString = $"{MockTrackString}{trailingMarkup}";
             
             // act
-            var trackUri = TrackParser.GetTrackUri(trackString, BandcampDownloader.StreamBaseUrl);
+            var trackUri = TrackParser.GetTrackUri(trackString, Downloader.StreamBaseUrl);
             
             // assert
             Assert.IsNotNull(trackUri);
-            Assert.AreEqual($"{BandcampDownloader.StreamBaseUrl}{MockTrackString}", trackUri.OriginalString);
+            Assert.AreEqual($"{Downloader.StreamBaseUrl}{MockTrackString}", trackUri.OriginalString);
         }
         
         [TestCase("&quot;")]
@@ -184,7 +184,7 @@ namespace BandcampDownloaderLib.UnitTests
         public void GetTrackUri_CannotGetTrackUri_Throws(string trackString)
         {
             // act
-            var thrown = Assert.Throws<BandcampDownloaderException>(() => TrackParser.GetTrackUri(trackString, BandcampDownloader.StreamBaseUrl));
+            var thrown = Assert.Throws<DownloaderException>(() => TrackParser.GetTrackUri(trackString, Downloader.StreamBaseUrl));
             
             // assert
             Assert.IsNotNull(thrown);

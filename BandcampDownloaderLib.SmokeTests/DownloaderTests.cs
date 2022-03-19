@@ -6,9 +6,9 @@ using NUnit.Framework;
 
 namespace BandcampDownloaderLib.SmokeTests
 {
-    public class BandcampDownloaderTests
+    public class DownloaderTests
     {
-        private readonly BandcampDownloader _downloader = new(
+        private readonly Downloader _downloader = new(
             new ResourceService(),
             new TrackTagger());
         

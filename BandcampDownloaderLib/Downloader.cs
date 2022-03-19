@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BandcampDownloaderLib
 {
-	public class BandcampDownloader
+	public class Downloader
 	{
 		public const string StreamBaseUrl = "https://t4.bcbits.com/stream/";
 
@@ -15,7 +15,7 @@ namespace BandcampDownloaderLib
 
 		public ProcessingStatus? ProcessingStatus { get; private set; }
 
-		public BandcampDownloader(
+		public Downloader(
 			IResourceService? resourceService,
 			ITrackTagger? trackTagger)
 		{

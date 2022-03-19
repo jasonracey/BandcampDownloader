@@ -20,7 +20,7 @@ namespace BandcampDownloaderLib
                 .ToArray();
             
             if (!trackStrings.Any())
-                throw new BandcampDownloaderException(ExceptionReason.NoTracksFoundOnPage);
+                throw new DownloaderException(ExceptionReason.NoTracksFoundOnPage);
 
             var tracks = trackStrings.Select(trackString =>
             {
@@ -43,7 +43,7 @@ namespace BandcampDownloaderLib
                 .Split("&quot;").FirstOrDefault();
             
             if (string.IsNullOrWhiteSpace(encodedTrackName))
-                throw new BandcampDownloaderException(ExceptionReason.CouldNotParseTrackName);
+                throw new DownloaderException(ExceptionReason.CouldNotParseTrackName);
             
             return HttpUtility.HtmlDecode(encodedTrackName);
         }
@@ -58,7 +58,7 @@ namespace BandcampDownloaderLib
                 .Split(",&quot;").FirstOrDefault() ?? string.Empty;
 
             if (!int.TryParse(trackNumberString, out int trackNumber))
-                throw new BandcampDownloaderException(ExceptionReason.CouldNotParseTrackNumber);
+                throw new DownloaderException(ExceptionReason.CouldNotParseTrackNumber);
 
             return trackNumber;
         }
@@ -75,7 +75,7 @@ namespace BandcampDownloaderLib
                 .FirstOrDefault();
             
             if (string.IsNullOrWhiteSpace(trackUrl))
-                throw new BandcampDownloaderException(ExceptionReason.CouldNotParseTrackUrl);
+                throw new DownloaderException(ExceptionReason.CouldNotParseTrackUrl);
             
             return new Uri($"{streamBaseUrl}{trackUrl}");
         }

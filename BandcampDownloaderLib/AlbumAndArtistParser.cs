@@ -17,7 +17,7 @@ namespace BandcampDownloaderLib
 
             if (items.Length <= 1 || string.IsNullOrWhiteSpace(items[0]) || string.IsNullOrWhiteSpace(items[1]))
             {
-                throw new BandcampDownloaderException(ExceptionReason.CouldNotParseAlbumAndArtist);
+                throw new DownloaderException(ExceptionReason.CouldNotParseAlbumAndArtist);
             }
         
             return (items[0], items[1]);

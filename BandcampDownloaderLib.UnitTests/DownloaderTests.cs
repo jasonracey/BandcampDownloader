@@ -5,20 +5,20 @@ using NUnit.Framework;
 namespace BandcampDownloaderLib.UnitTests
 {
     [TestFixture]
-    public class BandcampDownloaderTests
+    public class DownloaderTests
     {
         private const string MockAlbumPage = "<html><body>mock page</body></html>";
         private static readonly Uri MockUri = new ("https://www.bandcamp.com");
         
-        private readonly BandcampDownloader _target;
+        private readonly Downloader _target;
         private readonly Mock<IResourceService> _mockResourceService;
         private readonly Mock<ITrackTagger> _mockTrackTagger;
 
-        public BandcampDownloaderTests()
+        public DownloaderTests()
         {
             _mockResourceService = new Mock<IResourceService>();
             _mockTrackTagger = new Mock<ITrackTagger>();
-            _target = new BandcampDownloader(
+            _target = new Downloader(
                 _mockResourceService.Object,
                 _mockTrackTagger.Object);
         }
@@ -36,11 +36,11 @@ namespace BandcampDownloaderLib.UnitTests
         {
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var _ = new BandcampDownloader(null, _mockTrackTagger.Object);
+                var _ = new Downloader(null, _mockTrackTagger.Object);
             });
             Assert.Throws<ArgumentNullException>(() =>
             {
-                var _ = new BandcampDownloader(_mockResourceService.Object, null);
+                var _ = new Downloader(_mockResourceService.Object, null);
             });
         }
 
@@ -59,7 +59,7 @@ namespace BandcampDownloaderLib.UnitTests
                 .ReturnsAsync("<html>wrong page</html>");
             
             // act
-            var thrown = Assert.ThrowsAsync<BandcampDownloaderException>(async () => await _target.DownloadTracksAsync(MockUri));
+            var thrown = Assert.ThrowsAsync<DownloaderException>(async () => await _target.DownloadTracksAsync(MockUri));
             
             // assert
             Assert.IsNotNull(thrown);
