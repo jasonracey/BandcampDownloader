@@ -104,9 +104,7 @@ namespace BandcampDownloaderUI
         {
             StopTimer();
 
-            // Need to use a short interval to get Status to update to final message
-            // before the call to DownloadTracksAsync returns and stops the timer.
-            const double seconds = 0.01D;
+            const double seconds = 0.25D;
             
             _timer = NSTimer.CreateRepeatingScheduledTimer(seconds, _ => {
                 Progress.DoubleValue = GetPercentCompleted();
