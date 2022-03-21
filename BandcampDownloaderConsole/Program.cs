@@ -23,11 +23,11 @@ namespace BandcampDownloaderConsole
             }
             else
             {
-                var bandcampDownloader = new Downloader(
+                var downloader = new Downloader(
                     resourceService,
                     trackTagger);
     
-                bandcampDownloader.DownloadTracksAsync(uri);
+                downloader.DownloadTracksAsync(uri);
     
                 Console.WriteLine();
                 Console.WriteLine("Thanks for using Bandcamp Downloader.");
