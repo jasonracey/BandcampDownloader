@@ -19,10 +19,10 @@ namespace BandcampDownloaderLib
             Message = message ?? string.Empty;
         }
 		
-        public int CountCompleted { get; private set; }
+        public int CountCompleted { get; }
         
-        public int CountTotal { get; private set; }
+        public int CountTotal { get; }
         
-        public string Message { get; private set; }
+        public string Message { get; }
     }
 }

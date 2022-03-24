@@ -7,11 +7,9 @@ namespace BandcampDownloaderUI
 {
     public partial class ViewController : NSViewController
     {
-        private static readonly ResourceService ResourceService = new ResourceService();
-        private static readonly TrackTagger TrackTagger = new TrackTagger();
         private static readonly Downloader Downloader = new Downloader(
-            ResourceService,
-            TrackTagger);
+            new ResourceService(),
+            new TrackTagger());
         
         private NSTimer _timer;
         

@@ -5,7 +5,7 @@
 	<key>CFBundleName</key>
 	<string>Bandcamp Downloader</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.jasonracey.Bandcamp-Downloader</string>
+	<string>com.jasonracey.BandcampDownloader</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -28,6 +28,5 @@
 	<string>Main</string>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcon.appiconset</string>
-	
 </dict>
 </plist>
