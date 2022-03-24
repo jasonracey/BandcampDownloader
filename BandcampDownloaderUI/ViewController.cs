@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using AppKit;
 using BandcampDownloaderLib;
 using Foundation;
@@ -73,18 +72,28 @@ namespace BandcampDownloaderUI
 
         private void SetBusyState()
         {
+            URL.StringValue = string.Empty;
             URL.Editable = false;
             URL.Enabled = false;
+            Progress.DoubleValue = 0.0D;
             Progress.Hidden = false;
+            Status.StringValue = string.Empty;
+            Status.TextColor = NSColor.White;
             Clear.Enabled = false;
             Download.Enabled = false;
         }
 
         private void SetErrorState(string message)
         {
-            SetIdleState();
+            URL.StringValue = string.Empty;
+            URL.Editable = true;
+            URL.Enabled = true;
+            Progress.DoubleValue = 0.0D;
+            Progress.Hidden = true;
             Status.StringValue = message;
             Status.TextColor = NSColor.Red;
+            Clear.Enabled = false;
+            Download.Enabled = false;
         }
         
         private void SetIdleState()
