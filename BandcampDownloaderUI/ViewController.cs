@@ -70,7 +70,6 @@ namespace BandcampDownloaderUI
 
         private void SetBusyState()
         {
-            URL.StringValue = string.Empty;
             URL.Editable = false;
             URL.Enabled = false;
             Progress.DoubleValue = 0.0D;
@@ -83,7 +82,6 @@ namespace BandcampDownloaderUI
 
         private void SetErrorState(string message)
         {
-            URL.StringValue = string.Empty;
             URL.Editable = true;
             URL.Enabled = true;
             Progress.DoubleValue = 0.0D;
