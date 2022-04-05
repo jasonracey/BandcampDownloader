@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +8,8 @@ namespace BandcampDownloaderLib
 	public class Downloader
 	{
 		public const string StreamBaseUrl = "https://t4.bcbits.com/stream/";
+		
+		private readonly object _downloadCompletionLock = new();
 
 		private readonly IResourceService _resourceService;
 		private readonly ITrackTagger _trackTagger;
@@ -48,7 +49,7 @@ namespace BandcampDownloaderLib
 		    SetState(0, tracks.Length, "Downloading...");
 		    
 		    var downloadsCompleted = 0;
-		    foreach (var track in tracks)
+		    await Task.WhenAll(tracks.Select(async track =>
 		    {
 			    var filePath = DirectoryParser.GetDestinationFilePath(destinationDirectory, track.TrackNumber, track.TrackName);
 			    if (File.Exists(filePath))
@@ -68,13 +69,15 @@ namespace BandcampDownloaderLib
 				    track.TrackNumber, 
 				    tracks.Length);
 
-			    downloadsCompleted++;
-
-			    SetState(
-				    countCompleted: downloadsCompleted, 
-				    countTotal: tracks.Length, 
-				    message: $"Downloaded {downloadsCompleted}/{tracks.Length} {track.TrackName}");
-		    }
+			    lock (_downloadCompletionLock)
+			    {
+				    downloadsCompleted++;
+				    SetState(
+					    countCompleted: downloadsCompleted, 
+					    countTotal: tracks.Length, 
+					    message: $"Downloaded {downloadsCompleted}/{tracks.Length} {track.TrackName}");
+			    }
+		    }));
 		    
 		    SetState(0, 0, "Done!");
 		}
